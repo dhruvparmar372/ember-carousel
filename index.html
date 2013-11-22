@@ -5,27 +5,67 @@
 <title>Ember Starter Kit</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/bootstrap-responsive.css">
+  <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
 
   <script type="text/x-handlebars">
-    <h2>Welcome to Ember.js</h2>
+    <h2>Ember Carousel Component</h2>
 
     {{outlet}}
   </script>
 
+  <script type="text/x-handlebars" data-template-name="components/ember-carousel">
+	  	{{#if noImages}}
+	  		{{!add message here to show incase the carousel is empty.}}
+		{{else}}
+			<div {{bindAttr id=carouselId}} class="carousel slide ember-carousel" data-wrap=true>
+			{{#if showSingle}}
+				<!--<a {{!bindAttr href=carouselLinksWithImages.firstObject.link}}><img {{!bindAttr src=carouselLinksWithImages.firstObject.image}}></a>-->
+			{{else}}
+				{{#if showIndicators}}
+					{{view App.CarouselIndicatorsView contentBinding=indicators carouselIdBinding=carouselId }}
+				{{/if}}
+			{{/if}}
+
+			{{#if useImagesAsLinks}}
+				{{view App.CarouselInnerView contentBinding=carouselLinksWithImages}}
+			{{else}}
+				{{view App.CarouselInnerView contentBinding=carouselImages}}
+			{{/if}}
+
+			{{#if showSingle}}
+	  		{{else}}
+				{{#if showCarouselNavs}}
+				<a class="left carousel-control" {{bindAttr href=target}} data-slide="prev"><span>‹</span></a>
+				<a class="right carousel-control"{{bindAttr href=target}} data-slide="next"><span>›</span></a>
+				{{/if}}
+	  		{{/if}}
+			</div>
+		{{/if}}
+  </script>
+
   <script type="text/x-handlebars" data-template-name="index">
-    <ul>
-    {{#each item in model}}
-      <li>{{item}}</li>
-    {{/each}}
-    </ul>
+    <div class='carousel-container'>
+		<h3>Carousel 1</h3>
+		{{#ember-carousel carouselId="emberCarouselComponent1" carouselImagesBinding=carouselImages interval=3000}}
+		{{/ember-carousel}}
+    </div>
+	<div class='carousel-container'>
+	  <h3>Carousel 2(single image)</h3>
+	  {{#ember-carousel carouselId="emberCarouselComponent2" carouselImagesBinding=carouselImagesSingle interval=3000}}
+	  {{/ember-carousel}}
+	</div>
   </script>
 
   <script src="js/libs/jquery-1.9.1.js"></script>
   <script src="js/libs/handlebars-1.0.0.js"></script>
   <script src="js/libs/ember-1.1.2.js"></script>
+  <script src="js/libs/bootstrap.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/component/emberCarousel.js"></script>
 
 </body>
 </html>
