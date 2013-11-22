@@ -4,8 +4,10 @@ ember-carousel
 A ReUsable Carousel Component for Ember Js
 
 A Carousel Widget using Ember.Component and Ember.CollectionView compatible with Ember.js. To insert a carousel
-{{credi-carousel carouselId='myCarousel' carouselImages={Array of Image URLs to display} interval:5000 }}
-{{/credi-carousel}}
+
+`{{credi-carousel carouselId='myCarousel' carouselImages={Array of Image URLs to display} interval:5000 }}
+{{/credi-carousel}}`
+
 carouselId : takes in the unique id of your carousel
 carouselImages : should be an array of image urls
 interval : the cycling interval for the carousel
